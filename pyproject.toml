@@ -2,6 +2,7 @@
 name = "guardian-article-streamer"
 version = "0.1.0"
 description = "Fetches Guardian articles and streams them to AWS Kinesis."
+readme = "README.md"
 authors = [
     { name = "Patricia Plaza Rojas", email = "selva.pla.roj@gmail.com" }
 ]
