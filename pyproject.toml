@@ -1,0 +1,19 @@
+[project]
+name = "guardian-article-streamer"
+version = "0.1.0"
+description = "Fetches Guardian articles and streams them to AWS Kinesis."
+authors = [
+    { name = "Patricia Plaza Rojas", email = "selva.pla.roj@gmail.com" }
+]
+dependencies = [
+    "requests",
+    "boto3",
+    "pydantic",
+    "python-dotenv"
+]
+
+[tool.black]
+line-length = 88
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
