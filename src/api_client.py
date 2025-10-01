@@ -1,7 +1,6 @@
 import os
 import requests
 import json
-# import csv
 from dotenv import load_dotenv
 
 load_dotenv()
