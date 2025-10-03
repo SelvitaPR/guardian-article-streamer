@@ -1,5 +1,8 @@
-import argparse
+#GLUE CODE/ORCHESTRATION
+#IN THIS FILE, I'M GOING TO CONNECT THE api_client.py(fetcher) WITH THE publisher.py(this publishes JSON messages to any broker)
 
+import argparse
+#Guardian API → JSON → Local Kinesis.
 #I think the following creates a CLI program to do what we want the tool to do:
 
 parser = argparse.ArgumentParser(
