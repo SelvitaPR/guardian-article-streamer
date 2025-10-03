@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 API_KEY=os.getenv("GUARDIAN_API_KEY")
 API_URL=os.getenv("GUARDIAN_URL")
-
+#move this to utils.py
 def connect_to_guardian(url, auth=API_KEY):
     """
     Connects to the Guardian API and returns the JSON response.
