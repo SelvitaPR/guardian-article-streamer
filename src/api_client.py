@@ -1,3 +1,5 @@
+#ADDTOREADME: Run `python -m src.cli --search "machine learning" --date_from "2023-01-01"` to print 10 most recent articles locally.
+
 import os
 import requests
 import json
