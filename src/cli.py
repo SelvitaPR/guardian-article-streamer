@@ -1,5 +1,7 @@
 #GLUE CODE/ORCHESTRATION
 #IN THIS FILE, I'M GOING TO CONNECT THE api_client.py(fetcher) WITH THE publisher.py(this publishes JSON messages to any broker)
+#ADDTOREADME: Run `python -m src.cli --search "machine learning" --date_from "2023-01-01"` to print 10 most recent articles locally.
+
 
 import argparse
 #Guardian API → JSON → Local Kinesis.

@@ -1,5 +1,3 @@
-#ADDTOREADME: Run `python -m src.cli --search "machine learning" --date_from "2023-01-01"` to print 10 most recent articles locally.
-
 import os
 import requests
 import json
@@ -13,7 +11,8 @@ def connect_to_guardian(url, auth=API_KEY):
     """
     Connects to the Guardian API and returns the JSON response.
     """
-    response = requests.get(url, auth=(API_KEY, ""))
+    response = requests.get(url, params={"api-key": API_KEY})
+
     if response.status_code == 200:
         print("Status code:", response.status_code)
         return response.json()
@@ -29,4 +28,5 @@ if __name__ == '__main__':
     if data:
         with open("api_response.txt", "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
+        print(type(data))
         print("job done")
