@@ -40,10 +40,10 @@ def build_search_params(criteria: dict):
         'order-by': 'newest'
     }
 
-def process_and_print_results(data):
+def process_and_print_results(data: dict):
     """Prints the date, title, and URL for each article in the API response."""
     
-    if not data or 'response' not in data or 'results' not in data['response']:
+    if not data or 'response' not in data or 'results' not in data['response'] or data['response']['results'] == []:
         print("No articles found to display.")
         return
 
