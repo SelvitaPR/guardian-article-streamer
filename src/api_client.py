@@ -1,10 +1,9 @@
 import os
 import requests
 import json
-from pprint import pprint
 
 from dotenv import load_dotenv
-from utils import get_user_search_criteria, build_search_params, process_and_print_results
+from src.utils import get_user_search_criteria, build_search_params, process_and_print_results
 
 
 load_dotenv()
@@ -22,7 +21,6 @@ def fetch_guardian_content(api_url: str, params: dict):
     # Use the 'params' argument in requests.get()
     response = requests.get(api_url, params=request_params)
 
-    # ... (Error handling remains the same) ...
     if response.status_code == 200:
         print("Status code:", response.status_code)
         return response.json()
@@ -50,8 +48,6 @@ if __name__ == '__main__':
 
     if data:
         process_and_print_results(data)
-        # print(type(len(data)))
-        # pprint(data)
         with open("api_response.txt", "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
         print("\nAPI data successfully fetched and saved to api_response.txt.")
