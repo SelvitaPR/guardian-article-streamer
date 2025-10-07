@@ -1,7 +1,6 @@
-import pytest
 import unittest
 
-from unittest.mock import patch
+from unittest.mock import patch, call
 from datetime import datetime, date
 from src.utils import get_user_search_criteria, build_search_params, process_and_print_results
 
@@ -143,7 +142,69 @@ class TestBuildSearchParams(unittest.TestCase):
 
 
 class TestProcessAnPrint(unittest.TestCase):
-    pass
+
+
+    TEST_EMPTY_RESPONSE = {
+        'response': {
+            'status': 'ok',
+            'total': 0,
+            'results': []
+        }
+    }
+    TEST_VALID_RESPONSE = {
+        'response': {
+            'status': 'ok',
+            'results': [
+                {
+                    "webPublicationDate": "2025-10-01T10:00:00Z",
+                    "webTitle": "First Test Article Title",
+                    "webUrl": "http://example.com/article1"
+                },
+                {
+                    "webPublicationDate": "2025-10-02T11:00:00Z",
+                    "webTitle": "Second Test Article Title",
+                    "webUrl": "http://example.com/article2"
+                }
+            ]
+        }
+    }
+
+    @patch('builtins.print')
+    def test_prints_no_articles_found(self, mock_print):
+        """
+        Tests that the function prints 'No articles found to display.' when the 'results' list is empty.
+        """
+        process_and_print_results(self.TEST_EMPTY_RESPONSE)
+        mock_print.assert_called_with("No articles found to display.")
+
+        process_and_print_results({'some': 'data'})
+        mock_print.assert_called_with("No articles found to display.")
+
+    @patch('builtins.print')
+    def test_prints_right_fields(self, mock_print):
+        """
+        Tests that the function prints the correct fields in the expected format for multiple articles.
+        """
+        process_and_print_results(self.TEST_VALID_RESPONSE)
+        expected_calls = [
+            call('\n--- Extracted Article Data ---'),
+            
+            # First article
+            call('\nArticle 1:'),
+            call('  webPublicationDate:  2025-10-01T10:00:00Z'),
+            call('  webTitle: First Test Article Title'),
+            call('  webURL:   http://example.com/article1'),
+            
+            # Second article
+            call('\nArticle 2:'),
+            call('  webPublicationDate:  2025-10-02T11:00:00Z'),
+            call('  webTitle: Second Test Article Title'),
+            call('  webURL:   http://example.com/article2'),
+            
+            call('------------------------------')
+        ]
+        mock_print.assert_has_calls(expected_calls, any_order=False)
+
 
 if __name__ == '__main__':
     unittest.main()
