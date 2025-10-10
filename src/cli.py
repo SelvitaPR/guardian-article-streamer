@@ -3,8 +3,16 @@
 #ADDTOREADME: Run `python -m src.cli --search "machine learning" --date_from "2023-01-01"` to print 10 most recent articles locally.
 
 import argparse
+from src.publisher import KinesisPublisher 
 from src.utils import build_search_params, process_and_print_results
 from src.api_client import API_URL, fetch_guardian_content
+
+
+# --- CONFIGURATION ---
+# NOTE: In a production Lambda environment, this would be os.getenv("KINESIS_STREAM_NAME")
+KINESIS_STREAM_NAME = "guardian-article-stream" 
+KINESIS_REGION = "eu-west-2" # Use your chosen region
+# ---------------------
 
 
 parser = argparse.ArgumentParser(
@@ -23,19 +31,14 @@ if __name__ == '__main__':
     args = parser.parse_args()
     
     # 2. Convert Arguments to Criteria (Handling Optional Date)
-    
-    # Check if the user supplied a date
     if args.date_from is None or args.date_from == "":
-        # If no date is supplied, set the date object to today's date
         date_obj = date.today() 
         date_used_str = "today" 
     else:
-        # If a date IS supplied, attempt conversion (with error handling)
         try:
             date_obj = datetime.strptime(args.date_from, '%Y-%m-%d').date()
             date_used_str = args.date_from
         except ValueError:
-            # Handle invalid format for supplied date
             print(f"\nError: Invalid date format '{args.date_from}'. Please use YYYY-MM-DD.")
             exit(1)
             
@@ -53,13 +56,25 @@ if __name__ == '__main__':
     # 4. Format Parameters for API (uses your existing utility)
     api_params = build_search_params(user_criteria)
 
-    # 5. Fetch Content (using your existing function)
+    # 5. Fetch Content
     print(f"--- Searching Guardian for '{user_criteria['search_term']}' from {date_used_str} ---")
     data = fetch_guardian_content(API_URL, api_params)
 
-    # 6. Process and Print Results
+    # 6. Process, Print, and Publish Results (NEW LOGIC)
     if data:
+        # A. EXTRACT RECORDS: Get the clean list of articles
+        records_to_publish = data['response'].get('results', [])
+        
+        # B. INITIALIZE PUBLISHER: Create the Kinesis client connection
+        publisher = KinesisPublisher(
+            stream_name=KINESIS_STREAM_NAME, 
+            region_name=KINESIS_REGION
+        )
+        
+        # C. PUBLISH: Send the records to Kinesis
+        publisher.publish(records_to_publish)
+
+        # D. Print locally for confirmation
         process_and_print_results(data)
     else:
         print("Search failed or returned no data.")
-
