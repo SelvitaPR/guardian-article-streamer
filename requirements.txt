@@ -25,3 +25,6 @@ bandit>=1.7.5
 
 # For environment variable management (local development only)
 python-dotenv>=1.0.0
+
+# For formatting
+isort
