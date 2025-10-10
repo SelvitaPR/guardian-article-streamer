@@ -3,10 +3,10 @@
 #ADDTOREADME: Run `python -m src.cli --search "machine learning" --date_from "2023-01-01"` to print 10 most recent articles locally.
 
 import argparse
-from src.publisher import KinesisPublisher 
-from src.utils import build_search_params, process_and_print_results
-from src.api_client import API_URL, fetch_guardian_content
 
+from src.api_client import API_URL, fetch_guardian_content
+from src.publisher import KinesisPublisher
+from src.utils import build_search_params, process_and_print_results
 
 # --- CONFIGURATION ---
 # NOTE: In a production Lambda environment, this would be os.getenv("KINESIS_STREAM_NAME")
@@ -25,8 +25,8 @@ parser.add_argument('--date_from', help="date you'd like to search articles from
 
 if __name__ == '__main__':
     # Ensure date is imported here or globally
-    from datetime import datetime, date 
-    
+    from datetime import date, datetime
+
     # 1. Parse Arguments
     args = parser.parse_args()
     

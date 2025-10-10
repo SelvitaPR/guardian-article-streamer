@@ -1,10 +1,10 @@
-import unittest
 import os
+import unittest
+from unittest.mock import Mock, call, patch
 
 from dotenv import load_dotenv
-from unittest.mock import patch, Mock, call
-from src.api_client import fetch_guardian_content
 
+from src.api_client import fetch_guardian_content
 
 load_dotenv()
 API_KEY=os.getenv("GUARDIAN_API_KEY")

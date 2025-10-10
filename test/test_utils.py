@@ -1,8 +1,10 @@
 import unittest
+from datetime import date, datetime
+from unittest.mock import call, patch
 
-from unittest.mock import patch, call
-from datetime import datetime, date
-from src.utils import get_user_search_criteria, build_search_params, process_and_print_results
+from src.utils import (build_search_params, get_user_search_criteria,
+                       process_and_print_results)
+
 
 class TestGetUserSearchCriteria(unittest.TestCase):
 

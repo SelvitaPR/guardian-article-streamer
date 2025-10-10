@@ -1,6 +1,8 @@
-import boto3
 import json
-from typing import List, Dict, Any
+from typing import Any, Dict, List
+
+import boto3
+
 
 class KinesisPublisher:
     """

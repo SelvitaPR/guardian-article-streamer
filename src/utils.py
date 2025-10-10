@@ -1,5 +1,5 @@
-from datetime import datetime, date
 import json
+from datetime import date, datetime
 
 
 def get_user_search_criteria():

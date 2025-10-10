@@ -1,12 +1,14 @@
-import pytest
-import unittest
-import boto3
 import json
-from moto import mock_aws
+import unittest
 from unittest.mock import MagicMock, call
 
-from src.publisher import KinesisPublisher
+import boto3
+import pytest
 from botocore.exceptions import ClientError
+from moto import mock_aws
+
+from src.publisher import KinesisPublisher
+
 
 @pytest.fixture(scope='session')
 def stream_name():

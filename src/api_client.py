@@ -1,10 +1,11 @@
-import os
-import requests
 import json
+import os
 
+import requests
 from dotenv import load_dotenv
-from src.utils import get_user_search_criteria, build_search_params, process_and_print_results
 
+from src.utils import (build_search_params, get_user_search_criteria,
+                       process_and_print_results)
 
 load_dotenv()
 API_KEY=os.getenv("GUARDIAN_API_KEY")
