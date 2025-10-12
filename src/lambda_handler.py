@@ -4,5 +4,5 @@
 
 import boto3
 
-def lambda_handler():
+def lambda_handler(event, context):
     lambda_client = boto3.client('lambda')
