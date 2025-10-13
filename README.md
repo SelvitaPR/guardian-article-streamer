@@ -62,8 +62,8 @@ pip install -r requirements. txt
 ```
 GUARDIAN_API_KEY=**** 
 GUARDIAN_URL=**** 
-SECRET_NAME=****
-KINESIS_REGION=****
+SECRET_NAME=guardian/article/streamer/api/credentials
+KINESIS_REGION=**** (make sure you use the same region as in your aws configuration)
 KINESIS_STREAM_NAME=****
 ```
 You can get API credentials at [The Guardian API](https://open-platform.theguardian.com/access/). You will also need these for step 5.
