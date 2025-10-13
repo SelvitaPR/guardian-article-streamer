@@ -2,6 +2,7 @@
 
 <details>
 <summary>Table of Contents</summary>
+
 1. [About The Project](#about-the-project) 
     - [Built With](#built-with)
 2. [Getting Started](#getting-started)  
@@ -21,8 +22,10 @@ Guardian Article Streamer is a Python tool that fetches articles from the Guardi
 ### Built And Test With
 - Python
 - Pydantic
-- LocalStack
 - Boto3
+- isort
+- black
+- flake8
 
 ## Getting started
 
@@ -51,20 +54,27 @@ git clone https://github.com/SelvitaPR/guardian-article-streamer.git
   aws configure
   ```
 
-3. Install requirements and other dependencies
+3. Install requirements and other dependencies. It is highly recommended to work in a virtual enviroment (venv). Follow [this link](https://docs.python.org/3/library/venv.html) for instuctions. Finally, run the following command in the activated venv.
 ```
 pip install -r requirements. txt
 ```
-4. If you are making any changes to the code or testing it, add the following to your .env file.
+4. If you are making any changes to the code or testing it locally, add the following to your .env file.
 ```
 GUARDIAN_API_KEY=**** 
 GUARDIAN_URL=**** 
+SECRET_NAME=****
+KINESIS_REGION=****
+KINESIS_STREAM_NAME=****
 ```
-You can get these credentials at [The Guardian API](https://open-platform.theguardian.com/access/).
+You can get API credentials at [The Guardian API](https://open-platform.theguardian.com/access/). You will also need these for step 5.
 
-5. In maintain security, set up the following secrets in the aws secrets manager .
-  - guardian_article_streamer_secret:
-      
+5. In maintaining security, set up the following secret in your AWS Secrets Manager.
+  - **Secret name**: guardian/article/streamer/api/credentials
+  - **key/pair values**:
+
+      GUARDIAN_API_KEY=**** 
+
+      GUARDIAN_URL=**** 
 
 ## Contributor
 
