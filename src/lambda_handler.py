@@ -15,7 +15,7 @@ from src.publisher import KinesisPublisher
 
 # --- CONFIGURATION (Read from Environment Variables) ---
 # These variables will be set in the Lambda console
-SECRET_NAME = os.environ.get("SECRET_NAME", "guardian/article/streamer/api/credentials") 
+SECRET_NAME = os.environ.get("SECRET_NAME") 
 KINESIS_STREAM_NAME = os.environ.get("KINESIS_STREAM_NAME") 
 KINESIS_REGION = os.environ.get("KINESIS_REGION")
 # ---------------------------------------------
