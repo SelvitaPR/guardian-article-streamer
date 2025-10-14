@@ -6,6 +6,8 @@ readme = "README.md"
 authors = [
     { name = "Patricia Plaza Rojas", email = "selva.pla.roj@gmail.com" }
 ]
+
+license = { text = "MIT" }
 dependencies = [
     "requests",
     "boto3",
@@ -13,8 +15,18 @@ dependencies = [
     "python-dotenv"
 ]
 
+[build-system]
+# It specifies the minimum dependencies required to build the project
+requires = ["setuptools>=61.0.0"]
+# It specifies the backend tool to use for building
+build-backend = "setuptools.build_meta"
+
+
+
+
 [tool.black]
 line-length = 88
 
 [tool.pytest.ini_options]
-testpaths = ["tests"]
+
+testpaths = ["test"] 
