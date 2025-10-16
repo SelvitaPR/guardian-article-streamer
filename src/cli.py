@@ -1,8 +1,5 @@
-#GLUE CODE/ORCHESTRATION
 #IN THIS FILE, I'M GOING TO CONNECT THE api_client.py(fetcher) WITH THE publisher.py(this publishes JSON messages to any broker)
-#ADDTOREADME: Run `python -m src.cli --search "machine learning" --date_from "2023-01-01"` to print 10 most recent articles locally.
-#ADDTOREADME: they have to run isort to format their code? or just say that it was formatted with it (I ran "isort ." and committed changes)
-#SELVA REMEMBER TO RUN BLACK AND FLAKE8, MAYBE INSIDE pyproject.toml?
+
 import argparse
 
 from src.api_client import API_URL, fetch_guardian_content
