@@ -1,8 +1,8 @@
 import json
 import os
-import requests
+from typing import Any, Dict
 
-from typing import Dict, Any
+import requests
 
 
 def fetch_guardian_content(api_url: str, params: dict, api_key: str) -> Dict[str, Any] or None:

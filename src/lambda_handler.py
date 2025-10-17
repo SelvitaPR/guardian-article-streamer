@@ -1,12 +1,13 @@
+import json
 import os
+from datetime import date, datetime
+
 import boto3
 from botocore.exceptions import ClientError
-from datetime import datetime, date
-import json
 
 from src.api_client import fetch_guardian_content
+from src.publisher import KinesisPublisher
 from src.utils import build_search_params
-from src.publisher import KinesisPublisher 
 
 # --- CONFIGURATION (Read from Environment Variables) ---
 # These variables will be set in the Lambda console
