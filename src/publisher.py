@@ -2,7 +2,6 @@ import json
 from typing import Any, Dict, List
 
 import boto3
-from botocore.exceptions import ClientError
 
 
 # --- LOCAL PUBLISHER ---
