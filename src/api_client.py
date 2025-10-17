@@ -33,24 +33,3 @@ def fetch_guardian_content(api_url: str, params: dict, api_key: str) -> Dict[str
         print("Response:", response.text)
     return None
 
-
-if __name__ == '__main__':
-    
-    print("--- Starting Guardian API Fetcher ---")
-    
-    user_criteria = get_user_search_criteria()
-    
-    if not user_criteria:
-        print("Could not gather search criteria. Exiting.")
-        exit()
-
-    api_params = build_search_params(user_criteria)
-    
-    data = fetch_guardian_content(API_URL, api_params)
-
-    if data:
-        process_and_print_results(data)
-        with open("api_response.txt", "w", encoding="utf-8") as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
-        print("\nAPI data successfully fetched and saved to api_response.txt.")
-        print("Job done.")
