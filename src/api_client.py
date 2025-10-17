@@ -5,7 +5,9 @@ from typing import Any, Dict
 import requests
 
 
-def fetch_guardian_content(api_url: str, params: dict, api_key: str) -> Dict[str, Any] or None:
+def fetch_guardian_content(
+    api_url: str, params: dict, api_key: str
+) -> Dict[str, Any] or None:
     """
     Connects to the Guardian API using the given URL, search parameters, and API key.
 
@@ -19,9 +21,11 @@ def fetch_guardian_content(api_url: str, params: dict, api_key: str) -> Dict[str
     """
     # Create a new dictionary for the request parameters, keep it pure.
     request_params = params.copy()
-    request_params['api-key'] = api_key  # Add the required API key
+    request_params["api-key"] = api_key  # Add the required API key
 
-    response = requests.get(api_url, params=request_params) # Use the 'params' argument in requests.get()
+    response = requests.get(
+        api_url, params=request_params
+    )  # Use the 'params' argument in requests.get()
 
     if response.status_code == 200:
         print("Status code:", response.status_code)
@@ -32,4 +36,3 @@ def fetch_guardian_content(api_url: str, params: dict, api_key: str) -> Dict[str
         print(f"Error: Received status code {response.status_code}")
         print("Response:", response.text)
     return None
-
